@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Mobile OS Simulator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="hero card">
+      <div>
+        <p class="eyebrow">Mini Mobile Operating System Simulator</p>
+        <h1>Mobile OS Control Center</h1>
+        <p class="subtle">Interactive process scheduling, memory pressure, file I/O blocking, locks, and controlled failure behavior.</p>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span>Scheduler</span>
+          <strong id="schedulerMode">FIFO</strong>
+        </div>
+        <div class="stat">
+          <span>Tick</span>
+          <strong id="tickValue">0</strong>
+        </div>
+        <div class="stat">
+          <span>Running</span>
+          <strong id="runningPid">Idle</strong>
+        </div>
+      </div>
+    </header>
+
+    <section class="grid">
+      <div class="card controls">
+        <div class="card-title-row">
+          <h2>System Controls</h2>
+          <span class="badge" id="schedulerBadge">FIFO</span>
+        </div>
+        <div class="button-grid">
+          <button data-action="open-app">Open App</button>
+          <button data-action="close-app">Close App</button>
+          <button data-action="switch-scheduler">Switch Scheduler</button>
+          <button data-action="file-io">Simulate File I/O</button>
+          <button data-action="memory-pressure">Simulate Memory Pressure</button>
+          <button data-action="lock-conflict">Simulate Lock Conflict</button>
+          <button data-action="priority-inversion">Priority Inversion</button>
+          <button data-action="failure">Trigger Failure Scenario</button>
+          <button class="danger" data-action="reset">Reset System</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title-row">
+          <h2>RAM Usage</h2>
+          <span class="mono" id="ramText">0 / 4096 MB</span>
+        </div>
+        <div class="memory-bar">
+          <div class="memory-fill" id="memoryFill"></div>
+        </div>
+        <div class="memory-meta">
+          <span id="ramPercent">0%</span>
+          <span>Pressure handler kills lower-priority apps first</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid lower">
+      <div class="card panel">
+        <div class="card-title-row">
+          <h2>Processes</h2>
+          <span class="subtle" id="processCount">0 apps</span>
+        </div>
+        <div class="state-strip" id="stateStrip"></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>PID</th>
+                <th>App</th>
+                <th>State</th>
+                <th>RAM</th>
+                <th>Priority</th>
+                <th>Wait</th>
+              </tr>
+            </thead>
+            <tbody id="processTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="card panel">
+          <div class="card-title-row">
+            <h2>Locks</h2>
+            <span class="subtle">Shared resources</span>
+          </div>
+          <div id="lockPanel" class="mini-list"></div>
+        </div>
+
+        <div class="card panel">
+          <div class="card-title-row">
+            <h2>Files</h2>
+            <span class="subtle">Simulated storage</span>
+          </div>
+          <div id="filePanel" class="mini-list"></div>
+        </div>
+      </div>
+
+      <div class="card panel logs">
+        <div class="card-title-row">
+          <h2>Kernel Logs</h2>
+          <span class="subtle">Real-time events</span>
+        </div>
+        <div id="logPanel" class="log-panel"></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
